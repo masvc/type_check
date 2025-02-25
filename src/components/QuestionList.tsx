@@ -11,7 +11,7 @@ const QuestionList: React.FC<QuestionListProps> = ({ questions, onAnswer, curren
         {currentQ.options.map((option, index) => (
           <button
             key={index}
-            className="option-button"
+            className={`option-button option-${String.fromCharCode(65 + index)}`}
             onClick={() => onAnswer(option.scores)}
           >
             {option.text}

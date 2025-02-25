@@ -15,23 +15,36 @@ const App: React.FC = () => {
   });
 
   const handleAnswer = (newScores: Scores) => {
-    setScores({
-      youkya: scores.youkya + newScores.youkya,
-      inkya: scores.inkya + newScores.inkya,
-      nekura: scores.nekura + newScores.nekura,
-      neaka: scores.neaka + newScores.neaka
-    });
+    setScores(prev => ({
+      youkya: prev.youkya + newScores.youkya,
+      inkya: prev.inkya + newScores.inkya,
+      nekura: prev.nekura + newScores.nekura,
+      neaka: prev.neaka + newScores.neaka
+    }));
     setCurrentQuestion(prev => prev + 1);
+  };
+
+  const handleReset = () => {
+    setCurrentQuestion(0);
+    setScores({
+      youkya: 0,
+      inkya: 0,
+      nekura: 0,
+      neaka: 0
+    });
   };
 
   return (
     <div className="container">
-      <h1 style={{ 
-        fontSize: '2rem', 
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginBottom: '2rem'
-      }}>
+      <h1 
+        className="main-title"
+        onClick={handleReset}
+        style={{ 
+          textAlign: 'center', 
+          marginBottom: '2rem',
+          cursor: 'pointer'
+        }}
+      >
         2×2タイプ診断
       </h1>
       <ProgressBar current={currentQuestion} total={questions.length} />
@@ -42,7 +55,7 @@ const App: React.FC = () => {
           onAnswer={handleAnswer}
         />
       ) : (
-        <ResultView scores={scores} />
+        <ResultView scores={scores} onReset={handleReset} />
       )}
     </div>
   );

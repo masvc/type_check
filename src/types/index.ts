@@ -5,14 +5,35 @@ export interface Scores {
   neaka: number;
 }
 
+export interface ResultViewProps {
+  scores: Scores;
+  onReset: () => void;
+}
+
 export interface Option {
   text: string;
-  scores: Scores;
+  points: Scores;
 }
 
 export interface Question {
   text: string;
-  options: Option[];
+  options: Choice[];
+}
+
+export interface Choice {
+  text: string;
+  scores: Scores;
+}
+
+export interface Result {
+  type: string;
+  description: string;
+  scores: {
+    youkya: number;
+    inkya: number;
+    nekura: number;
+    neaka: number;
+  };
 }
 
 export interface ProgressBarProps {
@@ -25,7 +46,3 @@ export interface QuestionListProps {
   currentQuestion: number;
   onAnswer: (scores: Scores) => void;
 }
-
-export interface ResultViewProps {
-  scores: Scores;
-} 
