@@ -14,5 +14,6 @@ export default defineConfig({
     alias: {
       '@': '/src'
     }
-  }
+  },
+  base: '/type_check/'
 })
